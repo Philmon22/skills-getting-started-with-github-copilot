@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: Build stage
+         run: echo "build stage"
+  dev: 
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      -  name: dev stage
+         run: echo "dev stage"
+  int:
+    runs-on: ubuntu-latest
+    needs: dev
+    steps:
+      -  name: Build stage
+         run: echo "int stage"
+  int2: 
+    needs: dev
+    runs-on: ubuntu-latest
+    steps:
+      -  name: dev stage
+         run: echo "int2 stage"
+  qa: 
+    needs: [int, int2]
+    if: always() && (needs.int.result == 'success' || needs.int2.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      -  name: dev stage
+         run: echo "qa stage"
