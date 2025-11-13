@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -  name: dev stage
-         run: echo "int2 stage"
+         run: exit 1
   qa: 
     needs: [int, int2]
     if: always() && (needs.int.result == 'success' || needs.int2.result == 'success')
