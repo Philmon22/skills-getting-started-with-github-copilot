@@ -21,7 +21,7 @@ jobs:
     needs: dev
     steps:
       -  name: Build stage
-         run: echo "int stage"
+         run: exit 1
   int2: 
     needs: dev
     runs-on: ubuntu-latest
